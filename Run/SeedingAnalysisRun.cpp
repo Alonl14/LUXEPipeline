@@ -136,7 +136,7 @@ int main(int argc, char* argv[]) {
     std::vector<LUXETrackFinding::Seed> badSeeds;
     std::vector<SimpleSourceLink> slBatch(start,end);
     std::vector<LUXETrackFinding::Seed> seeds = LUXETrackFinding::LUXEPathSeeder(gctx, gOpt, detector, slBatch,
-                                                     "/Users/alonlevi/CLionProjects/LUXEPipeline/build"); //Zlookups
+                                                     "/Users/alonlevi/CLionProjects/LUXEPipeline/build/Zlookups"); //
 
             SimpleSourceLink::SurfaceAccessor SAseed{*detector};
             int count = 1;
@@ -194,17 +194,17 @@ int main(int argc, char* argv[]) {
 //    }
     std::string filename = "seed_data.root";
     analyzeSeeds(seeds,filename);
-//    for (auto s:badSeeds) {
-//        std::vector<Acts::Vector3> badPos;
-//        for (auto sl : s.originSourceLinks) {
-//            badPos.push_back(SA(sl)->
-//                    localToGlobal(gctx, sl.parameters, Acts::Vector3{0,1,0}));
-//        }
-//        for (int b=0;b<badPos.size()-1;b++)
-//        Acts::GeometryView3D::drawSegment(
-//                volumeObj,badPos[b],
-//                badPos[b+1], pConfig);
-//    }
+    for (auto s:badSeeds) {
+        std::vector<Acts::Vector3> badPos;
+        for (auto sl : s.originSourceLinks) {
+            badPos.push_back(SA(sl)->
+                    localToGlobal(gctx, sl.parameters, Acts::Vector3{0,1,0}));
+        }
+        for (int b=0;b<badPos.size()-1;b++)
+        Acts::GeometryView3D::drawSegment(
+                volumeObj,badPos[b],
+                badPos[b+1], pConfig);
+    }
     volumeObj.write("volumes.obj");
 
     // Run all configured algorithms and return the appropriate status.

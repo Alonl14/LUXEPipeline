@@ -178,7 +178,7 @@ namespace LUXETrackFinding {
             }
             if (globalPos[1] <= gOpt.layerZPositions[0] ||
                     (globalPos[1] <= gOpt.layerZPositions[1]-gOpt.deltaZ &&
-                     globalPos[0] <= gOpt.chipTranslationXOdd.at(0))) {
+                     globalPos[0] <= gOpt.chipTranslationXOdd.at(0)+1.8)) {
 
                 std::vector<SimpleSourceLink> seedSourceLinks{sourceLinks[i]};
                 std::vector<Acts::Vector3> seedDistances;
