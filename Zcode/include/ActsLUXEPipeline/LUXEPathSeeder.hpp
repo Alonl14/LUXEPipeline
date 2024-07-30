@@ -115,13 +115,15 @@ namespace LUXETrackFinding {
             if(i==0) i++;
         }
         for (auto& sl : sourceLinks) {
+
             auto id = sl.geometryId().sensitive();
             Acts::Vector3 globalPos = SA(sl)->
                     localToGlobal(gctx, sl.parameters, Acts::Vector3{0,1,0});
+
             int layer = static_cast<int>(id/10);
+
             if (layer!=1) {
                 auto lName = "layer_"+std::to_string(layer);
-//                std::cout<<"Filling Layer: "<<layer<<std::endl;
                 double x = globalPos[0];
                 double z = globalPos[2];
                 int bin = slMap[lName]->FindBin(x, z);
@@ -159,11 +161,11 @@ namespace LUXETrackFinding {
         Seeds seeds;
         Acts::Vector4 ipParams;
 
-//        Acts::Vector4 roadWidthX{100_um,250_um,350_um,450_um};
-//        Acts::Vector4 roadWidthZ{50_um,80_um,120_um,150_um};
+        Acts::Vector4 roadWidthX{100_um,150_um,200_um,300_um};
+        Acts::Vector4 roadWidthZ{50_um,80_um,120_um,150_um};
 
-        Acts::Vector4 roadWidthX{1200_um,2000_um,2000_um,2000_um};
-        Acts::Vector4 roadWidthZ{1200_um,2000_um,2000_um,2000_um};
+//        Acts::Vector4 roadWidthX{250_um,250_um,300_um,350_um};
+//        Acts::Vector4 roadWidthZ{250_um,250_um,300_um,350_um};
 
         start = std::chrono::steady_clock::now();
         auto end = std::chrono::steady_clock::now();

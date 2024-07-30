@@ -24,7 +24,7 @@
 /// energy vs position histograms for each layer
 int main(int argc, char* argv[]) {
     using namespace LUXENavigator;
-    Acts::Logging::Level logLevel = Acts::Logging::INFO;
+    Acts::Logging::Level logLevel = Acts::Logging::VERBOSE;
 
     // setup the sequencer first w/ config derived from options
     Sequencer::Config seqCfg;
@@ -82,15 +82,14 @@ int main(int argc, char* argv[]) {
                         volumeObj, *(surf), gctx,
                         Acts::Transform3::Identity(), pConfig);
             m.push_back(std::make_pair(surf->geometryId(),resPixel));
-            std::cout<<"Surface x transform: "<<surf->center(gctx)[0]<<std::endl;
-            std::cout<<"Surface y transform: "<<surf->center(gctx)[1]<<std::endl;
-            std::cout<<"Surface z transform: "<<surf->center(gctx)[2]<<std::endl;
+            std::cout<<"Surface g ID: "<<surf->geometryId().sensitive()<<std::endl;
             std::cout<<"Surface bounds: "<<surf->bounds()<<std::endl;
         }
     }
 
     Acts::ActsScalar m_e = 0.000511;
-    std::vector<LUXENavigator::Measurement> results = LUXENavigator::loadMeasurementsFromFile("Zmeasurements/100k_measurements.dat"); //
+    std::vector<LUXENavigator::Measurement> results = LUXENavigator::loadMeasurementsFromFile
+            ("high_E_measurements.dat"); //
     SimpleSourceLink::SurfaceAccessor SA{*detector};
     std::vector<SimpleSourceLink> sl4Seeding;
 
